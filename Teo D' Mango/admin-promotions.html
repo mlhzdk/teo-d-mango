@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Promotions - Teo D' Mango</title>
+  <link rel="stylesheet" href="admin-admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo"><h2>Teo D' <span>Mango</span></h2></div>
+    <ul class="nav-links">
+      <li><a href="index-admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+      <li><a href="admin-orders.html"><i class="fas fa-receipt"></i> Orders</a></li>
+      <li><a href="admin-menu.html"><i class="fas fa-utensils"></i> Menu</a></li>
+      <li><a href="admin-customers.html"><i class="fas fa-users"></i> Customers</a></li>
+      <li><a href="admin-promotions.html" class="active"><i class="fas fa-tags"></i> Promotions</a></li>
+      <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+      <li><a href="admin-settings.html"><i class="fas fa-cogs"></i> Settings</a></li>
+      <li><a href="admin-login.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <h1>Promotions</h1>
+      <div class="profile"><i class="fas fa-user-circle"></i> Admin</div>
+    </header>
+
+    <section class="promotions">
+      <h2>Manage Promotions</h2>
+      <button class="btn-edit">+ Add New Promo</button>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Promo Title</th><th>Discount</th><th>Valid Until</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td>Buy 2 Mango Shakes, Get 1 Free</td>
+            <td>33%</td>
+            <td>Oct 15, 2025</td>
+            <td><button class="btn-edit">Edit</button><button class="btn-delete">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Orders - Teo D' Mango</title>
+    <link rel="stylesheet" href="admin-admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>Teo D' <span>Mango</span></h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index-admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="admin-orders.html" class="active"><i class="fas fa-receipt"></i> Orders</a></li>
+            <li><a href="admin-menu.html"><i class="fas fa-utensils"></i> Menu</a></li>
+            <li><a href="admin-customers.html"><i class="fas fa-users"></i> Customers</a></li>
+            <li><a href="admin-promotions.html"><i class="fas fa-tags"></i> Promotions</a></li>
+            <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+            <li><a href="admin-settings.html"><i class="fas fa-cogs"></i> Settings</a></li>
+            <li><a href="admin-login.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main -->
+    <main class="main-content">
+        <header class="topbar">
+            <h1>Orders</h1>
+            <div class="profile"><i class="fas fa-user-circle"></i> Admin</div>
+        </header>
+
+        <!-- Controls -->
+        <section style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+            <div>
+                <input id="order-search" type="text" placeholder="Search orders..."
+                    style="padding:8px 10px; border-radius:6px; border:1px solid #ddd;">
+            </div>
+            <div>
+                <button id="download-orders" class="btn-edit"><i class="fas fa-file-csv"></i> Export CSV</button>
+                <button id="print-orders" class="btn-edit"><i class="fas fa-print"></i> Print</button>
+            </div>
+        </section>
+
+        <!-- Orders Table -->
+        <section class="table-section">
+            <h2>All Orders</h2>
+            <table id="orders-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#1001</td>
+                        <td>Juan Dela Cruz</td>
+                        <td>Classic Mango Shake (x2)</td>
+                        <td>₱150</td>
+                        <td><span class="status pending">Pending</span></td>
+                        <td>
+                            <select class="status-select">
+                                <option value="pending" selected>Pending</option>
+                                <option value="preparing">Preparing</option>
+                                <option value="completed">Completed</option>
+                                <option value="waiting-for-delivery-rider">Waiting for Delivery Rider</option>
+                                <option value="in-transit">In Transit</option>
+                                <option value="delivered">Delivered</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#1002</td>
+                        <td>Maria Santos</td>
+                        <td>Mango Avocado Shake (x1)</td>
+                        <td>₱95</td>
+                        <td><span class="status preparing">Preparing</span></td>
+                        <td>
+                            <select class="status-select">
+                                <option value="pending">Pending</option>
+                                <option value="preparing" selected>Preparing</option>
+                                <option value="completed">Completed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#1003</td>
+                        <td>Jose Rizal</td>
+                        <td>Mango Buko Shake (x3)</td>
+                        <td>₱285</td>
+                        <td><span class="status completed">Completed</span></td>
+                        <td>
+                            <select class="status-select">
+                                <option value="pending">Pending</option>
+                                <option value="preparing">Preparing</option>
+                                <option value="completed" selected>Completed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        // Update order status
+        document.querySelectorAll(".status-select").forEach(select => {
+            select.addEventListener("change", function () {
+                const statusText = this.value;
+                const row = this.closest("tr");
+                const statusCell = row.querySelector("td:nth-child(5)");
+
+                // Update status visually
+                statusCell.innerHTML = `<span class="status ${statusText}">${capitalize(statusText)}</span>`;
+            });
+        });
+
+        function capitalize(s) {
+            return s.charAt(0).toUpperCase() + s.slice(1);
+        }
+
+        // Search filter
+        document.getElementById("order-search").addEventListener("input", function () {
+            const q = this.value.toLowerCase();
+            document.querySelectorAll("#orders-table tbody tr").forEach(tr => {
+                tr.style.display = tr.innerText.toLowerCase().includes(q) ? "" : "none";
+            });
+        });
+
+        // Export to CSV
+        document.getElementById("download-orders").addEventListener("click", () => {
+            const rows = [];
+            document.querySelectorAll("#orders-table tr").forEach(tr => {
+                const cells = tr.querySelectorAll("th,td");
+                const row = Array.from(cells).map(td => `"${td.innerText}"`).join(",");
+                rows.push(row);
+            });
+            const csvContent = rows.join("\n");
+            const blob = new Blob([csvContent], { type: "text/csv" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "orders.csv";
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        // Print orders
+        document.getElementById("print-orders").addEventListener("click", () => {
+            window.print();
+        });
+    </script>
+</body>
+
+</html>

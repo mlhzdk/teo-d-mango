@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Teo D' Mango</title>
+    <link rel="stylesheet" href="user-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .about-content {
+            padding: 80px 0;
+        }
+
+        .about-section {
+            margin-bottom: 60px;
+        }
+
+        .about-section h2 {
+            color: #e67e22;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .about-section p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .value-card i {
+            font-size: 2.5rem;
+            color: #e67e22;
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .team-section {
+            background: #f5f5f5;
+            padding: 80px 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .team-member-img {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .team-member-info {
+            padding: 20px;
+        }
+
+        .team-member h3 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .team-member p {
+            color: #e67e22;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .team-member-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .mission,
+        .vision {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .mission h3,
+        .vision h3 {
+            color: #e67e22;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav class="top-nav">
+                <a href="index-user.html" class="logo">Teo D' <span>Mango</span></a>
+                <ul class="nav-links">
+                    <li><a href="index-user.html">HOME</a></li>
+                    <li><a href="user-menu.html">MENU</a></li>
+                    <li><a href="user-our-story.html">OUR STORY</a></li>
+                    <li><a href="user-about.html">ABOUT</a></li>
+                    <li><a href="user-contact.html">CONTACT US</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>About Teo D' Mango</h1>
+            <p class="tagline">Crafting unforgettable mango experiences with passion, quality, and a touch of sweetness
+            </p>
+        </div>
+    </section>
+
+    <section class="about-content">
+        <div class="container">
+            <div class="about-section">
+                <h2>Who We Are</h2>
+                <p>Teo D' Mango is more than just a mango shake business - we're a passionate team dedicated to bringing
+                    the authentic taste of premium Philippine mangoes to every community. Founded with a simple vision,
+                    we've grown from a single stall to a beloved local brand known for quality and innovation.</p>
+                <p>Our commitment goes beyond serving delicious drinks. We strive to create moments of joy and
+                    refreshment, one mango shake at a time, while supporting local mango farmers and sustainable
+                    practices.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>Our Mission & Vision</h2>
+                <div class="mission-vision">
+                    <div class="mission">
+                        <h3>Our Mission</h3>
+                        <p>To make premium mango creations accessible to everyone by using only the highest quality
+                            ingredients, maintaining affordable prices, and providing exceptional customer experiences
+                            in every interaction.</p>
+                    </div>
+                    <div class="vision">
+                        <h3>Our Vision</h3>
+                        <p>To become the most trusted and beloved mango specialty brand in the Philippines, known for
+                            innovation, quality, and our commitment to community and sustainability.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2>Our Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Quality</h3>
+                        <p>We use only the freshest, highest-grade mangoes and ingredients in all our products.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-heart"></i>
+                        <h3>Passion</h3>
+                        <p>Our love for mangoes drives us to create the most delicious and innovative recipes.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Community</h3>
+                        <p>We believe in building strong relationships with our customers and supporting local
+                            communities.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-recycle"></i>
+                        <h3>Sustainability</h3>
+                        <p>We're committed to environmentally responsible practices and supporting local mango farmers.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px; color: #333;">Meet Our Team</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 40px;">Behind every delicious mango shake is
+                a dedicated team passionate about bringing you the best mango experience.</p>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-member-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Teodoro Mendoza III</h3>
+                        <p>Founder & CEO</p>
+                        <p class="team-member-desc">With over 15 years in the food industry, Teodoro started Teo D'
+                            Mango with a simple mission: to share his love for authentic mango flavors with his
+                            community.</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="team-member-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Melquiadez Mendoza</h3>
+                        <p>Head of Operations</p>
+                        <p class="team-member-desc">Melquiadez ensures every Teo D' Mango location maintains our high
+                            standards of quality and service that our customers have come to expect.</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="team-member-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Maylyn Mendoza</h3>
+                        <p>Product Development Manager</p>
+                        <p class="team-member-desc">Maylyn's creative flair and expertise in flavor profiles help us
+                            develop new and exciting mango creations that keep our customers coming back for more.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Teo D' Mango</h3>
+                    <p>We believe that premium mango shakes should be accessible to everyone, not just a luxury for a
+                        few. Our mission is to bring high-quality, naturally sweet mango creations to communities
+                        everywhere.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/17NpArsfbZ/?mibextid=wwXIfr"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/teodmango_?igsh=MWx2OHRxMGhyNjB4aw=="><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="user-our-story.html"><i class="fas fa-chevron-right"></i> Our Story</a></li>
+                        <li><a href="user-menu.html"><i class="fas fa-chevron-right"></i> Full Menu</a></li>
+                        <li><a href="user-about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="user-contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                        <li><a href="user-menu.html"><i class="fas fa-chevron-right"></i> Track Order</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Store Information</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Corner P. Gomez St., Ilustre Avenue, Lemery, Batangas,
+                            Philippines</li>
+                        <li><i class="fas fa-phone"></i> 0906 975 5155</li>
+                        <li><i class="fas fa-envelope"></i> teodmango@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 7am-10pm</li>
+                        <li><i class="fas fa-clock"></i> Sat-Sun: 8am-11pm</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Mango Newsletter</h3>
+                    <p>Subscribe for seasonal specials, new flavors, and exclusive discounts.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Teo D' Mango. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Nutrition Info</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

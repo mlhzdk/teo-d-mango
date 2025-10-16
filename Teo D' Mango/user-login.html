@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Teo D' Mango</title>
+  <link rel="stylesheet" href="user-style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Fullscreen Login Section */
+    .login-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      background: url('images/mango-bg.jpg') center/cover no-repeat;
+      position: relative;
+    }
+    .login-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+    }
+    .login-box {
+      position: relative;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      width: 380px;
+      max-width: 95%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      z-index: 2;
+    }
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #f57c00;
+    }
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #eee;
+    }
+    .tabs button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      background: #f4f4f4;
+      transition: 0.3s;
+    }
+    .tabs button.active {
+      background: #f57c00;
+      color: #fff;
+      font-weight: bold;
+    }
+    form { display: none; flex-direction: column; gap: 12px; }
+    form.active { display: flex; }
+    input, button {
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+    button {
+      background: #f57c00;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e96d00;
+    }
+    p.error { color: red; font-size: 14px; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="top-nav">
+        <a href="index-user.html" class="logo">Teo D' <span>Mango</span></a>
+        <ul class="nav-links">
+          <li><a href="index-user.html">HOME</a></li>
+          <li><a href="user-menu.html">MENU</a></li>
+          <li><a href="user-our-story.html">OUR STORY</a></li>
+          <li><a href="user-about.html">ABOUT</a></li>
+          <li><a href="user-contact.html">CONTACT US</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Login Section -->
+  <section class="login-section">
+    <div class="login-overlay"></div>
+    <div class="login-box">
+      <h2>Login Portal</h2>
+      <div class="tabs">
+        <button id="customerTab" class="active">Login</button>
+        <button id="signupTab">Sign Up</button>
+      </div>
+
+      <!-- Login -->
+      <form id="loginForm" class="active">
+        <input type="email" id="loginEmail" placeholder="Email" required>
+        <input type="password" id="loginPass" placeholder="Password" required>
+        <button type="submit">Login</button>
+        <p id="loginError" class="error"></p>
+      </form>
+
+      <!-- Customer Signup -->
+      <form id="signupForm">
+        <input type="text" id="signupName" placeholder="Full Name" required>
+        <input type="email" id="signupEmail" placeholder="Email" required>
+        <input type="password" id="signupPass" placeholder="Password" required>
+        <button type="submit">Sign Up</button>
+        <p id="signupError" class="error"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2023 Teo D' Mango. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tabs
+    const tabs = document.querySelectorAll(".tabs button");
+    const forms = document.querySelectorAll("form");
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        forms.forEach(f => f.classList.remove("active"));
+        tab.classList.add("active");
+        forms[i].classList.add("active");
+      });
+    });
+
+    // Signup (Customers only)
+    document.getElementById("signupForm").addEventListener("submit", e => {
+      e.preventDefault();
+      let name = document.getElementById("signupName").value;
+      let email = document.getElementById("signupEmail").value;
+      let pass = document.getElementById("signupPass").value;
+
+      let users = JSON.parse(localStorage.getItem("customers")) || [];
+      if (users.find(u => u.email === email)) {
+        document.getElementById("signupError").textContent = "Email already registered!";
+        return;
+      }
+      users.push({ name, email, password: pass });
+      localStorage.setItem("customers", JSON.stringify(users));
+      alert("Account created! Please log in.");
+    });
+
+    // Login (Check if Admin or Customer)
+    document.getElementById("loginForm").addEventListener("submit", e => {
+      e.preventDefault();
+      let email = document.getElementById("loginEmail").value;
+      let pass = document.getElementById("loginPass").value;
+
+      // Admin login
+      if (email === "teo.admin@gmail.com" && pass === "1234") {
+        window.location.href = "admin/dashboard.html";
+        return;
+      }
+
+      // Customer login
+      let users = JSON.parse(localStorage.getItem("customers")) || [];
+      let user = users.find(u => u.email === email && u.password === pass);
+
+      if (user) {
+        localStorage.setItem("loggedInUser", email);
+        window.location.href = "menu.html";
+      } else {
+        document.getElementById("loginError").textContent = "Invalid email or password!";
+      }
+    });
+  </script>
+</body>
+</html>

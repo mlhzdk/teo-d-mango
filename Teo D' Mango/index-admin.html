@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - Teo D' Mango</title>
+  <link rel="stylesheet" href="admin-admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Chart.js for charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <h2>Teo D' <span>Mango</span></h2>
+    </div>
+    <ul class="nav-links">
+      <li><a href="admin-dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+      <li><a href="admin-orders.html"><i class="fas fa-receipt"></i> Orders</a></li>
+      <li><a href="admin-menu.html"><i class="fas fa-utensils"></i> Menu</a></li>
+      <li><a href="admin-customers.html"><i class="fas fa-users"></i> Customers</a></li>
+      <li><a href="admin-promotions.html"><i class="fas fa-tags"></i> Promotions</a></li>
+      <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+      <li><a href="admin-settings.html"><i class="fas fa-cogs"></i> Settings</a></li>
+      <li><a href="admin-login.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="topbar">
+      <h1>Dashboard</h1>
+      <div class="profile"><i class="fas fa-user-circle"></i> Admin</div>
+    </header>
+
+    <!-- Summary Cards -->
+    <section class="cards">
+      <div class="card">
+        <h3>Today's Orders</h3>
+        <p>35</p>
+      </div>
+      <div class="card">
+        <h3>Total Revenue</h3>
+        <p>₱12,450</p>
+      </div>
+      <div class="card">
+        <h3>Pending Orders</h3>
+        <p>8</p>
+      </div>
+      <div class="card">
+        <h3>Customers</h3>
+        <p>220</p>
+      </div>
+    </section>
+
+    <!-- Sales Overview Chart -->
+    <section class="table-section" style="margin-top:20px;">
+      <h2>Sales Overview</h2>
+      <canvas id="salesChart" height="120"></canvas>
+    </section>
+
+    <!-- Two-column layout -->
+    <section style="display:grid; grid-template-columns: 2fr 1fr; gap:20px; margin-top:20px;">
+      <!-- Recent Orders -->
+      <div class="table-section">
+        <h2>Recent Orders</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#1001</td>
+              <td>Juan Dela Cruz</td>
+              <td>₱250</td>
+              <td><span class="status pending">Pending</span></td>
+            </tr>
+            <tr>
+              <td>#1002</td>
+              <td>Maria Santos</td>
+              <td>₱300</td>
+              <td><span class="status completed">Completed</span></td>
+            </tr>
+            <tr>
+              <td>#1003</td>
+              <td>Jose Rizal</td>
+              <td>₱150</td>
+              <td><span class="status preparing">Preparing</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Top Products -->
+      <div class="table-section">
+        <h2>Top Products</h2>
+        <ul style="list-style:none; padding:0;">
+          <li>🥭 Classic Mango Shake – 120 sold</li>
+          <li>🍍 Mango Tango – 95 sold</li>
+          <li>🍮 Mango Caramel Fusion – 85 sold</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Announcements & Notifications -->
+    <section style="display:grid; grid-template-columns: 1fr 1fr; gap:20px; margin-top:20px;">
+      <div class="table-section">
+        <h2>Announcements</h2>
+        <p>- New branch opening next month 🎉</p>
+        <p>- Staff meeting on Friday, 3 PM</p>
+      </div>
+      <div class="table-section">
+        <h2>Notifications</h2>
+        <p>⚠️ 8 Pending Orders need attention</p>
+        <p>📦 Low stock on Mango Caramel Fusion</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Chart.js example sales chart
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+        datasets: [{
+          label: 'Sales (₱)',
+          data: [1200, 1450, 900, 1800, 2200, 2000, 2500],
+          borderColor: '#f57c00',
+          backgroundColor: 'rgba(245,124,0,0.2)',
+          tension: 0.3,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reports - Teo D' Mango</title>
+  <link rel="stylesheet" href="admin-admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo"><h2>Teo D' <span>Mango</span></h2></div>
+    <ul class="nav-links">
+      <li><a href="index-admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+      <li><a href="admin-orders.html"><i class="fas fa-receipt"></i> Orders</a></li>
+      <li><a href="admin-menu.html"><i class="fas fa-utensils"></i> Menu</a></li>
+      <li><a href="admin-customers.html"><i class="fas fa-users"></i> Customers</a></li>
+      <li><a href="admin-promotions.html"><i class="fas fa-tags"></i> Promotions</a></li>
+      <li><a href="admin-reports.html" class="active"><i class="fas fa-chart-bar"></i> Reports</a></li>
+      <li><a href="admin-settings.html"><i class="fas fa-cogs"></i> Settings</a></li>
+      <li><a href="admin-login.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <h1>Reports</h1>
+      <div class="profile"><i class="fas fa-user-circle"></i> Admin</div>
+    </header>
+
+    <section class="reports">
+      <h2>Sales Reports</h2>
+
+      <!-- Export Buttons -->
+      <div style="margin:15px 0;">
+        <button id="download-csv" class="btn-edit"><i class="fas fa-file-csv"></i> Download CSV</button>
+        <button id="print-report" class="btn-edit"><i class="fas fa-print"></i> Print Report</button>
+      </div>
+
+      <div class="report-cards">
+        <div class="card"><h3>Today’s Sales</h3><p>₱2,350</p></div>
+        <div class="card"><h3>This Week</h3><p>₱15,000</p></div>
+        <div class="card"><h3>This Month</h3><p>₱60,000</p></div>
+      </div>
+
+      <h3>Top Selling Shakes</h3>
+      <ul id="top-products">
+        <li>Classic Mango Shake - 120 orders</li>
+        <li>Mango Avocado Shake - 80 orders</li>
+        <li>Mango Buko Shake - 70 orders</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    // Download CSV
+    document.getElementById('download-csv').addEventListener('click', () => {
+      const rows = [
+        ['Report', 'Value'],
+        ["Todays Sales", "2,350"],
+        ["This Week", "15,000"],
+        ["This Month", "60,000"],
+        [],
+        ["Top Selling Shakes", ""],
+        ["Classic Mango Shake", "120 orders"],
+        ["Mango Avocado Shake", "80 orders"],
+        ["Mango Buko Shake", "70 orders"]
+      ];
+      const csvContent = rows.map(r => r.join(",")).join("\n");
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'sales_report.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Print Report
+    document.getElementById('print-report').addEventListener('click', () => {
+      window.print();
+    });
+  </script>
+</body>
+</html>

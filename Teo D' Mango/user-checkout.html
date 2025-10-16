@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout - Teo D' Mango</title>
+  <link rel="stylesheet" href="user-style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .checkout-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    .checkout-container h2 {
+      color: #f57c00;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .checkout-container label {
+      font-weight: bold;
+      display: block;
+      margin: 10px 0 5px;
+    }
+    .checkout-container input, 
+    .checkout-container select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+    .checkout-container button {
+      width: 100%;
+      padding: 12px;
+      background: #f57c00;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .checkout-container button:hover {
+      background: #e96d00;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="top-nav">
+        <a href="index-user.html" class="logo">Teo D' <span>Mango</span></a>
+        <ul class="nav-links">
+          <li><a href="index-user.html">HOME</a></li>
+          <li><a href="user-menu.html">MENU</a></li>
+          <li><a href="user-contact.html">CONTACT US</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="checkout-container">
+    <h2>Checkout</h2>
+    <form id="checkoutForm">
+      <label>Selected Item</label>
+      <input type="text" id="itemName" readonly>
+
+      <label>Quantity</label>
+      <select id="quantity">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+
+      <label>Full Name</label>
+      <input type="text" id="custName" required>
+
+      <label>Phone Number</label>
+      <input type="tel" id="custPhone" required>
+
+      <label>Delivery Address</label>
+      <input type="text" id="custAddress" required>
+
+      <button type="submit">Confirm Order</button>
+    </form>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2023 Teo D' Mango. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Load selected item from menu
+    document.getElementById("itemName").value = localStorage.getItem("selectedItem") || "No item selected";
+
+    // Checkout form submit
+    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let order = {
+        item: document.getElementById("itemName").value,
+        quantity: document.getElementById("quantity").value,
+        name: document.getElementById("custName").value,
+        phone: document.getElementById("custPhone").value,
+        address: document.getElementById("custAddress").value,
+        customer: localStorage.getItem("loggedInUser"),
+        status: "Pending",
+        date: new Date().toLocaleString()
+      };
+
+      // Save orders in localStorage (for demo)
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+      orders.push(order);
+      localStorage.setItem("orders", JSON.stringify(orders));
+
+      alert("Your order has been placed successfully!");
+      window.location.href = "menu.html";
+    });
+  </script>
+</body>

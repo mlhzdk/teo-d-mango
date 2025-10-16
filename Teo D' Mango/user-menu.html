@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Online - Teo D' Mango</title>
+    <link rel="stylesheet" href="user-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .order-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+
+        .order-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .menu-categories {
+            margin-bottom: 30px;
+        }
+
+        .category-tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+
+        .category-tab {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .category-tab.active {
+            color: #e67e22;
+        }
+
+        .category-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #e67e22;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .item-image {
+            height: 180px;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-details {
+            padding: 20px;
+        }
+
+        .item-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .item-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .item-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #e67e22;
+            margin-bottom: 15px;
+        }
+
+        .item-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            background: #f5f5f5;
+            border: none;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+
+        .quantity-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .quantity-input {
+            width: 40px;
+            height: 30px;
+            border: none;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .add-to-cart {
+            background: #e67e22;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: #d35400;
+        }
+
+        .cart-container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 120px;
+        }
+
+        .cart-title {
+            color: #e67e22;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-items {
+            margin-bottom: 30px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #e67e22;
+            font-weight: 600;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-quantity-btn {
+            background: #ddd;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+
+        .cart-quantity-btn:hover {
+            background: #ccc;
+        }
+
+        .cart-quantity {
+            margin: 0 10px;
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            margin-left: 15px;
+            transition: color 0.2s;
+        }
+
+        .cart-item-remove:hover {
+            color: #c0392b;
+        }
+
+        .cart-summary {
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            background: #e67e22;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .checkout-btn:hover {
+            background: #d35400;
+        }
+
+        .checkout-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #999;
+            padding: 30px 0;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .checkout-modal {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 8px;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .checkout-modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            background: #e67e22;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #e67e22;
+            outline: none;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .modal-footer {
+            padding: 20px 30px;
+            background: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-total {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #e67e22;
+        }
+
+        .confirm-order-btn {
+            background: #e67e22;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .confirm-order-btn:hover {
+            background: #d35400;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .close-modal:hover {
+            background: #f0f0f0;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px 30px;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #27ae60;
+            margin-bottom: 20px;
+        }
+
+        .success-message h3 {
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+
+        .track-order-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .track-order-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .track-order-container h2 {
+            color: #e67e22;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+
+        .track-order-container p {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .track-order-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+
+        .track-order-form input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e67e22;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .track-order-form button {
+            background: #e67e22;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .track-order-form button:hover {
+            background: #d35400;
+        }
+
+        .tracking-results {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            display: none;
+            border: 1px solid #eee;
+        }
+
+        .tracking-results.active {
+            display: block;
+        }
+
+        .tracking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tracking-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #e67e22;
+        }
+
+        .order-status {
+            background: #e67e22;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .order-details {
+            margin-bottom: 30px;
+        }
+
+        .order-details h4 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .order-items {
+            list-style: none;
+        }
+
+        .order-items li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .tracking-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .tracking-timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e67e22;
+        }
+
+        .timeline-step {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-step::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #e67e22;
+        }
+
+        .timeline-step.active::before {
+            background: #e67e22;
+        }
+
+        .timeline-step.completed::before {
+            background: #27ae60;
+            border-color: #27ae60;
+        }
+
+        .timeline-step.completed .timeline-content {
+            color: #27ae60;
+        }
+
+        .timeline-step.active .timeline-content {
+            color: #e67e22;
+            font-weight: 600;
+        }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            color: #666;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 3000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.error {
+            background: #e74c3c;
+        }
+
+        @media (max-width: 992px) {
+            .order-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-container {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .category-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 10px;
+            }
+
+            .category-tab {
+                padding: 10px 15px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .track-order-form {
+                flex-direction: column;
+            }
+
+            .track-order-form input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+
+            .track-order-form button {
+                border-radius: 4px;
+                padding: 12px;
+            }
+
+            .tracking-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .order-status {
+                margin-top: 10px;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+
+            .modal-footer .close-modal {
+                order: 2;
+            }
+
+            .modal-footer .confirm-order-btn {
+                order: 1;
+            }
+
+            .modal-footer .modal-total {
+                order: 0;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav class="top-nav">
+                <a href="index-user.html" class="logo">Teo D' <span>Mango</span></a>
+                <ul class="nav-links">
+                    <li><a href="index-user.html">HOME</a></li>
+                    <li><a href="user-menu.html">MENU</a></li>
+                    <li><a href="user-our-story.html">OUR STORY</a></li>
+                    <li><a href="user-about.html">ABOUT</a></li>
+                    <li><a href="user-contact.html">CONTACT US</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Order Online</h1>
+            <p class="tagline">Enjoy our delicious mango creations from the comfort of your home</p>
+        </div>
+    </section>
+
+    <section class="order-section">
+        <div class="container">
+            <div class="order-container">
+                <div class="menu-section">
+                    <div class="menu-categories">
+                        <div class="category-tabs">
+                            <button class="category-tab active" data-category="shakes">Mango Shakes</button>
+                            <button class="category-tab" data-category="seasonal">Seasonal Shakes</button>
+                            <button class="category-tab" data-category="drinks">Other Drinks</button>
+                        </div>
+                    </div>
+
+                    <div class="menu-items" id="menu-items">
+                        <!-- Menu items will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="cart-section">
+                    <div class="cart-container">
+                        <h2 class="cart-title"><i class="fas fa-shopping-cart"></i> Your Order</h2>
+                        <div class="cart-items" id="cart-items">
+                            <div class="empty-cart">
+                                <i class="fas fa-shopping-cart" style="font-size: 2rem; margin-bottom: 15px;"></i>
+                                <p>Your cart is empty</p>
+                                <p>Add items from the menu to get started</p>
+                            </div>
+                        </div>
+                        <div class="cart-summary">
+                            <div class="cart-total">
+                                <span>Total:</span>
+                                <span id="cart-total">₱0.00</span>
+                            </div>
+                            <button class="checkout-btn" id="checkout-btn" disabled>
+                                <i class="fas fa-credit-card"></i> Proceed to Checkout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="checkout-modal">
+            <div class="modal-header">
+                <h2>Complete Your Order</h2>
+                <button class="close-modal-btn" id="close-modal-top">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="checkout-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Delivery Address</label>
+                        <textarea id="address" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="instructions">Special Instructions</label>
+                        <textarea id="instructions" class="form-control" rows="2"
+                            placeholder="Any special requests or delivery instructions"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="close-modal" id="close-modal">Cancel</button>
+                <div class="modal-total" id="modal-total">₱0.00</div>
+                <button class="confirm-order-btn" id="confirm-order">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Success Modal -->
+    <div class="modal-overlay" id="success-modal">
+        <div class="checkout-modal">
+            <div class="success-message">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Order Placed Successfully!</h3>
+                <p>Thank you for your order. We'll start preparing it right away.</p>
+                <p>Your tracking number: <strong id="tracking-number-display"></strong></p>
+                <button class="confirm-order-btn" id="success-close" style="margin-top: 20px;">Continue
+                    Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Track Your Order Section -->
+    <section class="track-order-section">
+        <div class="container">
+            <div class="track-order-container">
+                <h2>Track Your Order</h2>
+                <p>Enter your tracking number to check the status of your order</p>
+
+                <form class="track-order-form" id="track-order-form">
+                    <input type="text" id="tracking-input" placeholder="Enter your tracking number" required>
+                    <button type="submit">Track Order</button>
+                </form>
+
+                <div class="tracking-results" id="tracking-results">
+                    <div class="tracking-header">
+                        <div class="tracking-number">Tracking Number: <span
+                                id="result-tracking-number">TDM-123456</span></div>
+                        <div class="order-status" id="order-status">Preparing</div>
+                    </div>
+
+                    <div class="order-details">
+                        <h4>Order Details</h4>
+                        <ul class="order-items" id="order-items">
+                            <!-- Order items will be populated by JavaScript -->
+                        </ul>
+                    </div>
+
+                    <div class="tracking-timeline" id="tracking-timeline">
+                        <!-- Timeline will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Item added to cart!</span>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Teo D' Mango</h3>
+                    <p>We believe that premium mango shakes should be accessible to everyone, not just a luxury for
+                        a
+                        few. Our mission is to bring high-quality, naturally sweet mango creations to communities
+                        everywhere.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/17NpArsfbZ/?mibextid=wwXIfr"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/teodmango_?igsh=MWx2OHRxMGhyNjB4aw=="><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="user-our-story.html"><i class="fas fa-chevron-right"></i> Our Story</a></li>
+                        <li><a href="user-menu.html"><i class="fas fa-chevron-right"></i> Full Menu</a></li>
+                        <li><a href="user-about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="user-contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                        <li><a href="user-menu.html"><i class="fas fa-chevron-right"></i> Track Order</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Store Information</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Corner P. Gomez St., Ilustre Avenue, Lemery,
+                            Batangas,
+                            Philippines</li>
+                        <li><i class="fas fa-phone"></i> 0906 975 5155</li>
+                        <li><i class="fas fa-envelope"></i> teodmango@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 7am-10pm</li>
+                        <li><i class="fas fa-clock"></i> Sat-Sun: 8am-11pm</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Mango Newsletter</h3>
+                    <p>Subscribe for seasonal specials, new flavors, and exclusive discounts.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Teo D' Mango. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Nutrition Info</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuItems = {
+            shakes: [
+                {
+                    id: 1,
+                    name: "Classic Mango Shake",
+                    description: "Our original recipe with fresh mangoes and milk.",
+                    price: 120,
+                    image: "mango-shake.png"
+                },
+                {
+                    id: 2,
+                    name: "Classic Avocado Shake",
+                    description: "A delicious blend of fresh mangoes and avocado with milk.",
+                    price: 150,
+                    image: "avocado-shake.png"
+                },
+                {
+                    id: 3,
+                    name: "Classic Buko Shake",
+                    description: "Refreshing combination of mango and young coconut with milk.",
+                    price: 140,
+                    image: "buko-shake.png"
+                },
+                {
+                    id: 4,
+                    name: "Classic Strawberry Shake",
+                    description: "Sweet and tangy strawberry delight made with fresh strawberries.",
+                    price: 160,
+                    image: "strawberry-shake.png"
+                },
+            ],
+            seasonal: [
+                {
+                    id: 7,
+                    name: "Classic Avocado Shake",
+                    description: "Refreshing combination of mango and young coconut with milk.",
+                    price: 150,
+                    image: "avocado-shake.png"
+                },
+                {
+                    id: 8,
+                    name: "Classi Strawberry Shake",
+                    description: "Sweet and tangy strawberry delight made with fresh strawberries.",
+                    price: 160,
+                    image: "strawberry-shake.png"
+                },
+            ],
+            drinks: [
+                {
+                    id: 11,
+                    name: "Mango Iced Tea",
+                    description: "Refreshing iced tea with mango syrup and fresh mango bits",
+                    price: 90,
+                    image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                },
+                {
+                    id: 12,
+                    name: "Mango Lemonade",
+                    description: "Zesty lemonade with sweet mango puree",
+                    price: 100,
+                    image: "https://images.unsplash.com/photo-1628991830065-2e2b8b8b8b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                },
+                {
+                    id: 13,
+                    name: "Mango Smoothie",
+                    description: "Thick and creamy mango smoothie with yogurt",
+                    price: 130,
+                    image: "https://images.unsplash.com/photo-1570197788417-0e82375c9371?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                },
+                {
+                    id: 14,
+                    name: "Mango Milkshake",
+                    description: "Classic milkshake with mango syrup and vanilla ice cream",
+                    price: 140,
+                    image: "https://images.unsplash.com/photo-1570197788417-0e82375c9371?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                }
+            ]
+        };
+
+        // Cart state
+        let cart = [];
+        let currentCategory = 'shakes';
+
+        // DOM elements
+        const menuItemsContainer = document.getElementById('menu-items');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalElement = document.getElementById('cart-total');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const checkoutModal = document.getElementById('checkout-modal');
+        const closeModalTop = document.getElementById('close-modal-top');
+        const closeModal = document.getElementById('close-modal');
+        const confirmOrderBtn = document.getElementById('confirm-order');
+        const modalTotalElement = document.getElementById('modal-total');
+        const successModal = document.getElementById('success-modal');
+        const successCloseBtn = document.getElementById('success-close');
+        const trackingNumberDisplay = document.getElementById('tracking-number-display');
+        const trackOrderForm = document.getElementById('track-order-form');
+        const trackingInput = document.getElementById('tracking-input');
+        const trackingResults = document.getElementById('tracking-results');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        // Initialize the page
+        function init() {
+            renderMenuItems(currentCategory);
+            setupEventListeners();
+            updateCart();
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Category tabs
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const category = tab.getAttribute('data-category');
+                    setActiveCategory(category);
+                });
+            });
+
+            // Checkout button
+            checkoutBtn.addEventListener('click', openCheckoutModal);
+
+            // Modal controls
+            closeModalTop.addEventListener('click', closeCheckoutModal);
+            closeModal.addEventListener('click', closeCheckoutModal);
+            confirmOrderBtn.addEventListener('click', placeOrder);
+            successCloseBtn.addEventListener('click', closeSuccessModal);
+
+            // Track order form
+            trackOrderForm.addEventListener('submit', trackOrder);
+
+            // Close modals when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === checkoutModal) {
+                    closeCheckoutModal();
+                }
+                if (e.target === successModal) {
+                    closeSuccessModal();
+                }
+            });
+        }
+
+        // Render menu items for a category
+        function renderMenuItems(category) {
+            menuItemsContainer.innerHTML = '';
+            const items = menuItems[category];
+
+            items.forEach(item => {
+                const menuItemElement = document.createElement('div');
+                menuItemElement.className = 'menu-item';
+                menuItemElement.innerHTML = `
+                    <div class="item-image">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="item-details">
+                        <h3 class="item-name">${item.name}</h3>
+                        <p class="item-description">${item.description}</p>
+                        <div class="item-price">₱${item.price.toFixed(2)}</div>
+                        <div class="item-actions">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                                <input type="text" class="quantity-input" value="1" readonly data-id="${item.id}">
+                                <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                            </div>
+                            <button class="add-to-cart" data-id="${item.id}">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+                menuItemsContainer.appendChild(menuItemElement);
+            });
+
+            // Add event listeners to the new buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', addToCart);
+            });
+
+            document.querySelectorAll('.quantity-btn.minus').forEach(button => {
+                button.addEventListener('click', decreaseQuantity);
+            });
+
+            document.querySelectorAll('.quantity-btn.plus').forEach(button => {
+                button.addEventListener('click', increaseQuantity);
+            });
+        }
+
+        // Set active category
+        function setActiveCategory(category) {
+            currentCategory = category;
+            categoryTabs.forEach(tab => {
+                if (tab.getAttribute('data-category') === category) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            renderMenuItems(category);
+        }
+
+        // Update quantity in menu
+        function increaseQuantity(e) {
+            const itemId = parseInt(e.target.getAttribute('data-id'));
+            const input = document.querySelector(`.quantity-input[data-id="${itemId}"]`);
+            let value = parseInt(input.value);
+            input.value = value + 1;
+        }
+
+        function decreaseQuantity(e) {
+            const itemId = parseInt(e.target.getAttribute('data-id'));
+            const input = document.querySelector(`.quantity-input[data-id="${itemId}"]`);
+            let value = parseInt(input.value);
+            if (value > 1) {
+                input.value = value - 1;
+            }
+        }
+
+        // Add item to cart
+        function addToCart(e) {
+            const loggedIn = localStorage.getItem("loggedInUser");
+
+            // Check login first
+            if (!loggedIn) {
+                alert("Please log in to place your order.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const itemId = parseInt(e.target.getAttribute('data-id'));
+            const input = document.querySelector(`.quantity-input[data-id="${itemId}"]`);
+            const quantity = parseInt(input.value);
+
+            // Find the item in the current category
+            let item = null;
+            for (const category in menuItems) {
+                const foundItem = menuItems[category].find(i => i.id === itemId);
+                if (foundItem) {
+                    item = foundItem;
+                    break;
+                }
+            }
+
+            if (!item) return;
+
+            // Check if item is already in cart
+            const existingItemIndex = cart.findIndex(cartItem => cartItem.id === itemId);
+
+            if (existingItemIndex !== -1) {
+                // Update quantity if item already exists
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                // Add new item to cart
+                cart.push({
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    quantity: quantity,
+                    image: item.image
+                });
+            }
+
+            // Reset quantity input
+            input.value = 1;
+
+            updateCart();
+            showToast(`${item.name} added to cart!`);
+        }
+
+        // Update cart display
+        function updateCart() {
+            // Clear cart items
+            cartItemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart" style="font-size: 2rem; margin-bottom: 15px;"></i>
+                        <p>Your cart is empty</p>
+                        <p>Add items from the menu to get started</p>
+                    </div>
+                `;
+                checkoutBtn.disabled = true;
+                cartTotalElement.textContent = '₱0.00';
+                return;
+            }
+
+            // Calculate total
+            let total = 0;
+
+            // Render cart items
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">₱${item.price.toFixed(2)}</div>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="cart-quantity-btn minus" data-id="${item.id}">-</button>
+                        <span class="cart-quantity">${item.quantity}</span>
+                        <button class="cart-quantity-btn plus" data-id="${item.id}">+</button>
+                        <button class="cart-item-remove" data-id="${item.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItemElement);
+            });
+
+            // Add event listeners to cart buttons
+            document.querySelectorAll('.cart-quantity-btn.minus').forEach(button => {
+                button.addEventListener('click', decreaseCartQuantity);
+            });
+
+            document.querySelectorAll('.cart-quantity-btn.plus').forEach(button => {
+                button.addEventListener('click', increaseCartQuantity);
+            });
+
+            document.querySelectorAll('.cart-item-remove').forEach(button => {
+                button.addEventListener('click', removeFromCart);
+            });
+
+            // Update total and enable checkout
+            cartTotalElement.textContent = `₱${total.toFixed(2)}`;
+            checkoutBtn.disabled = false;
+        }
+
+        // Cart quantity controls
+        function increaseCartQuantity(e) {
+            const itemId = parseInt(e.target.getAttribute('data-id'));
+            const item = cart.find(item => item.id === itemId);
+            if (item) {
+                item.quantity += 1;
+                updateCart();
+            }
+        }
+
+        function decreaseCartQuantity(e) {
+            const itemId = parseInt(e.target.getAttribute('data-id'));
+            const item = cart.find(item => item.id === itemId);
+            if (item && item.quantity > 1) {
+                item.quantity -= 1;
+                updateCart();
+            }
+        }
+
+        function removeFromCart(e) {
+            const itemId = parseInt(e.target.closest('button').getAttribute('data-id'));
+            cart = cart.filter(item => item.id !== itemId);
+            updateCart();
+            showToast('Item removed from cart', 'error');
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            toastMessage.textContent = message;
+            toast.className = 'toast';
+            if (type === 'error') {
+                toast.classList.add('error');
+            }
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Open checkout modal
+        function openCheckoutModal() {
+            // Calculate total for modal
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            modalTotalElement.textContent = `₱${total.toFixed(2)}`;
+
+            checkoutModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close checkout modal
+        function closeCheckoutModal() {
+            checkoutModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Place order
+        function placeOrder() {
+            // Validate form
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+
+            if (!firstName || !lastName || !phone || !email || !address) {
+                showToast('Please fill in all required fields', 'error');
+                return;
+            }
+
+            // Generate tracking number
+            const trackingNumber = 'TDM-' + Math.floor(100000 + Math.random() * 900000);
+            trackingNumberDisplay.textContent = trackingNumber;
+
+            // Close checkout modal and open success modal
+            closeCheckoutModal();
+            successModal.classList.add('active');
+
+            // Save order to localStorage for tracking
+            const order = {
+                trackingNumber: trackingNumber,
+                items: [...cart],
+                customer: {
+                    firstName: firstName,
+                    lastName: lastName,
+                    phone: phone,
+                    email: email,
+                    address: address,
+                    instructions: document.getElementById('instructions').value
+                },
+                status: 'preparing',
+                date: new Date().toISOString()
+            };
+
+            // Save order to localStorage
+            localStorage.setItem(`order-${trackingNumber}`, JSON.stringify(order));
+
+            // Clear cart
+            cart = [];
+            updateCart();
+
+            // Reset form
+            document.getElementById('checkout-form').reset();
+        }
+
+        // Close success modal
+        function closeSuccessModal() {
+            successModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Track order
+        function trackOrder(e) {
+            e.preventDefault();
+            const trackingNumber = trackingInput.value.trim();
+
+            if (!trackingNumber) {
+                showToast('Please enter a tracking number', 'error');
+                return;
+            }
+
+            // Get order from localStorage
+            const order = JSON.parse(localStorage.getItem(`order-${trackingNumber}`));
+
+            if (!order) {
+                showToast('Order not found. Please check your tracking number.', 'error');
+                return;
+            }
+
+            // Display order details
+            document.getElementById('result-tracking-number').textContent = trackingNumber;
+            document.getElementById('order-status').textContent = order.status.charAt(0).toUpperCase() + order.status.slice(1);
+
+            // Render order items
+            const orderItemsContainer = document.getElementById('order-items');
+            orderItemsContainer.innerHTML = '';
+
+            order.items.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${item.name} x ${item.quantity}</span>
+                    <span>₱${(item.price * item.quantity).toFixed(2)}</span>
+                `;
+                orderItemsContainer.appendChild(li);
+            });
+
+            // Render tracking timeline
+            const timelineContainer = document.getElementById('tracking-timeline');
+            timelineContainer.innerHTML = '';
+
+            const timelineSteps = [
+                { status: 'ordered', label: 'Order Received', date: order.date },
+                { status: 'preparing', label: 'Preparing Your Order', date: addMinutes(order.date, 5) },
+                { status: 'ready', label: 'Ready for Pickup/Delivery', date: addMinutes(order.date, 15) },
+                { status: 'completed', label: 'Order Completed', date: addMinutes(order.date, 30) }
+            ];
+
+            const statusIndex = ['ordered', 'preparing', 'ready', 'completed'].indexOf(order.status);
+
+            timelineSteps.forEach((step, index) => {
+                const stepElement = document.createElement('div');
+                stepElement.className = 'timeline-step';
+                if (index < statusIndex) {
+                    stepElement.classList.add('completed');
+                } else if (index === statusIndex) {
+                    stepElement.classList.add('active');
+                }
+
+                stepElement.innerHTML = `
+                    <div class="timeline-date">${formatDate(step.date)}</div>
+                    <div class="timeline-content">${step.label}</div>
+                `;
+                timelineContainer.appendChild(stepElement);
+            });
+
+            // Show tracking results
+            trackingResults.classList.add('active');
+        }
+
+        // Helper functions
+        function addMinutes(dateString, minutes) {
+            const date = new Date(dateString);
+            date.setMinutes(date.getMinutes() + minutes);
+            return date.toISOString();
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>

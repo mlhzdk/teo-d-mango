@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Menu Management - Teo D' Mango Admin</title>
+
+  <!-- shared admin stylesheet -->
+  <link rel="stylesheet" href="admin-admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Small page-only modal styles (move to admin.css if you prefer) -->
+  <style>
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      width: 720px;
+      max-width: 95%;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    .modal .modal-header {
+      padding: 16px 18px;
+      background: linear-gradient(90deg, var(--mango-orange), var(--mango-yellow));
+      color: white;
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+    }
+
+    .modal .modal-body { padding: 18px; max-height: 60vh; overflow:auto; }
+    .modal .modal-footer { padding: 12px 18px; display:flex; justify-content:flex-end; gap:10px; border-top:1px solid #eee; }
+
+    .form-row { display:flex; gap:12px; }
+    .form-group { flex:1; display:flex; flex-direction:column; margin-bottom:12px; }
+    .form-group label { font-weight:600; margin-bottom:6px; }
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group textarea,
+    .form-group select {
+      padding:8px 10px; border:1px solid #ddd; border-radius:6px; font-size:14px;
+    }
+    .form-group textarea { min-height:80px; resize:vertical; }
+
+    .thumb-preview {
+      width:110px;
+      height:80px;
+      border-radius:6px;
+      background:#f3f3f3;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      border:1px solid #eee;
+      font-size:12px;
+      color:#666;
+    }
+
+    .small-muted { font-size:12px; color: #666; margin-top:6px; }
+  </style>
+</head>
+<body>
+  <!-- Sidebar (same as other admin pages) -->
+  <aside class="sidebar">
+    <div class="logo"><h2>Teo D' <span>Mango</span></h2></div>
+    <ul class="nav-links">
+      <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+      <li><a href="orders.html"><i class="fas fa-receipt"></i> Orders</a></li>
+      <li><a href="menu.html" class="active"><i class="fas fa-utensils"></i> Menu</a></li>
+      <li><a href="customers.html"><i class="fas fa-users"></i> Customers</a></li>
+      <li><a href="promotions.html"><i class="fas fa-tags"></i> Promotions</a></li>
+      <li><a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+      <li><a href="settings.html"><i class="fas fa-cogs"></i> Settings</a></li>
+      <li><a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main -->
+  <main class="main-content">
+    <header class="topbar">
+      <h1>Menu Management</h1>
+      <div class="profile"><i class="fas fa-user-circle"></i> Admin</div>
+    </header>
+
+    <!-- Controls -->
+    <section style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+      <div style="display:flex; gap:12px; align-items:center;">
+        <button id="add-item-btn" class="btn-edit" style="padding:10px 14px;"><i class="fas fa-plus"></i> Add New Item</button>
+        <button id="export-csv" class="btn-edit" style="padding:10px 12px;">Export CSV</button>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center;">
+        <input id="menu-search" type="text" placeholder="Search menu items..." style="padding:8px 10px; border-radius:6px; border:1px solid #ddd;">
+        <select id="filter-category" style="padding:8px; border-radius:6px; border:1px solid #ddd;">
+          <option value="all">All Categories</option>
+          <option value="classic">Classic</option>
+          <option value="seasonal">Seasonal</option>
+          <option value="other-drinks">Other Drinks</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Table -->
+    <section class="table-section">
+      <h2>Menu Items</h2>
+
+      <table id="menu-table" aria-describedby="menu-items">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Featured</th>
+            <th>Status</th>
+            <th style="width:150px;">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- Sample rows with dataset attributes (used by the demo JS) -->
+          <tr data-id="1" data-name="Classic Mango Shake" data-category="classic" data-price="75" data-desc="Our signature shake with fresh mangoes and milk." data-featured="true" data-status="active" data-image="https://source.unsplash.com/160x120/?mango">
+            <td>#001</td>
+            <td><div style="width:80px;height:50px;border-radius:6px;overflow:hidden;"><img src="https://source.unsplash.com/160x120/?mango" alt="" style="width:100%;height:100%;object-fit:cover;"></div></td>
+            <td>Classic Mango Shake</td>
+            <td>Classic</td>
+            <td>₱75.00</td>
+            <td><span class="status completed">Yes</span></td>
+            <td><span class="status completed">Active</span></td>
+            <td>
+              <button class="btn-edit row-edit">Edit</button>
+              <button class="btn-delete row-delete">Delete</button>
+            </td>
+          </tr>
+
+          <tr data-id="2" data-name="Mango Tango" data-category="tropical" data-price="95" data-desc="Mango, pineapple & coconut milk." data-featured="false" data-status="active" data-image="https://source.unsplash.com/160x120/?smoothie">
+            <td>#002</td>
+            <td><div style="width:80px;height:50px;border-radius:6px;overflow:hidden;"><img src="https://source.unsplash.com/160x120/?smoothie" alt="" style="width:100%;height:100%;object-fit:cover;"></div></td>
+            <td>Mango Tango</td>
+            <td>Tropical</td>
+            <td>₱95.00</td>
+            <td><span class="status pending">No</span></td>
+            <td><span class="status completed">Active</span></td>
+            <td>
+              <button class="btn-edit row-edit">Edit</button>
+              <button class="btn-delete row-delete">Delete</button>
+            </td>
+          </tr>
+
+          <tr data-id="3" data-name="Mango Caramel Fusion" data-category="specialty" data-price="120" data-desc="Ripe mangoes with caramel & vanilla." data-featured="true" data-status="inactive" data-image="https://source.unsplash.com/160x120/?dessert">
+            <td>#003</td>
+            <td><div style="width:80px;height:50px;border-radius:6px;overflow:hidden;"><img src="https://source.unsplash.com/160x120/?dessert" alt="" style="width:100%;height:100%;object-fit:cover;"></div></td>
+            <td>Mango Caramel Fusion</td>
+            <td>Specialty</td>
+            <td>₱120.00</td>
+            <td><span class="status completed">Yes</span></td>
+            <td><span class="status pending">Inactive</span></td>
+            <td>
+              <button class="btn-edit row-edit">Edit</button>
+              <button class="btn-delete row-delete">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Modal + Overlay -->
+  <div class="modal-overlay" id="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <strong id="modal-title">Add Menu Item</strong>
+        <button id="close-modal" title="Close" style="background:none;border:none;color:white;font-size:20px;cursor:pointer;">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="menu-form" data-mode="add">
+          <input type="hidden" id="item-id">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="item-name">Name</label>
+              <input id="item-name" type="text" required>
+            </div>
+            <div class="form-group">
+              <label for="item-category">Category</label>
+              <select id="item-category">
+                <option value="classic">Classic</option>
+                <option value="tropical">Tropical</option>
+                <option value="specialty">Specialty</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="item-price">Price (₱)</label>
+              <input id="item-price" type="number" min="0" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label for="item-featured">Featured</label>
+              <select id="item-featured">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex:2;">
+              <label for="item-desc">Description</label>
+              <textarea id="item-desc"></textarea>
+            </div>
+
+            <div class="form-group" style="flex:1;">
+              <label for="item-image">Image URL</label>
+              <input id="item-image" type="text" placeholder="https://...">
+              <div class="thumb-preview" id="thumb-preview">Preview</div>
+              <div class="small-muted">Preview updates when you paste an image URL.</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="item-status">Status</label>
+              <select id="item-status">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+            <div style="flex:1;"></div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" id="cancel-btn" class="btn-delete">Cancel</button>
+            <button type="submit" class="btn-edit" id="save-item-btn">Save Item</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Minimal JS: open/close modal, demo CRUD (no persistence) -->
+  <script>
+    (function(){
+      const addBtn = document.getElementById('add-item-btn');
+      const overlay = document.getElementById('modal-overlay');
+      const closeBtn = document.getElementById('close-modal');
+      const cancelBtn = document.getElementById('cancel-btn');
+      const form = document.getElementById('menu-form');
+      const tbody = document.querySelector('#menu-table tbody');
+      const preview = document.getElementById('thumb-preview');
+      const imageInput = document.getElementById('item-image');
+      const saveBtn = document.getElementById('save-item-btn');
+      let nextId = (() => {
+        const ids = Array.from(tbody.querySelectorAll('tr')).map(r => Number(r.dataset.id));
+        return ids.length ? Math.max(...ids) + 1 : 1;
+      })();
+
+      function openModal(mode='add', data=null) {
+        form.reset();
+        form.dataset.mode = mode;
+        document.getElementById('item-id').value = data ? data.id : '';
+        document.getElementById('modal-title').textContent = mode === 'add' ? 'Add Menu Item' : 'Edit Menu Item';
+        if (data) {
+          document.getElementById('item-name').value = data.name;
+          document.getElementById('item-category').value = data.category;
+          document.getElementById('item-price').value = data.price;
+          document.getElementById('item-desc').value = data.desc;
+          document.getElementById('item-featured').value = data.featured;
+          document.getElementById('item-status').value = data.status;
+          document.getElementById('item-image').value = data.image;
+          setPreview(data.image);
+        } else {
+          setPreview('');
+        }
+        overlay.classList.add('open');
+      }
+
+      function closeModal() {
+        overlay.classList.remove('open');
+      }
+
+      addBtn.addEventListener('click', () => openModal('add'));
+      closeBtn.addEventListener('click', closeModal);
+      cancelBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+
+      imageInput.addEventListener('input', (e) => setPreview(e.target.value));
+
+      function setPreview(url) {
+        if (!url) {
+          preview.innerHTML = 'Preview';
+          preview.style.backgroundImage = 'none';
+          return;
+        }
+        preview.innerHTML = '';
+        preview.style.backgroundImage = `url("${url}")`;
+        preview.style.backgroundSize = 'cover';
+        preview.style.backgroundPosition = 'center';
+      }
+
+      // Handle Edit and Delete (delegated)
+      tbody.addEventListener('click', (e) => {
+        const editBtn = e.target.closest('.row-edit');
+        const delBtn = e.target.closest('.row-delete');
+
+        if (editBtn) {
+          const tr = editBtn.closest('tr');
+          const data = {
+            id: tr.dataset.id,
+            name: tr.dataset.name,
+            category: tr.dataset.category,
+            price: tr.dataset.price,
+            desc: tr.dataset.desc,
+            featured: tr.dataset.featured,
+            status: tr.dataset.status,
+            image: tr.dataset.image
+          };
+          openModal('edit', data);
+        }
+
+        if (delBtn) {
+          const tr = delBtn.closest('tr');
+          if (confirm('Delete this item?')) tr.remove();
+        }
+      });
+
+      // Submit handler - adds or updates the table row (demo only)
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const mode = form.dataset.mode;
+        const id = document.getElementById('item-id').value || (nextId++);
+        const name = document.getElementById('item-name').value.trim();
+        const category = document.getElementById('item-category').value;
+        const price = parseFloat(document.getElementById('item-price').value || 0).toFixed(2);
+        const desc = document.getElementById('item-desc').value.trim();
+        const featured = document.getElementById('item-featured').value;
+        const status = document.getElementById('item-status').value;
+        const image = document.getElementById('item-image').value.trim();
+
+        if (!name) { alert('Name is required'); return; }
+
+        if (mode === 'add') {
+          const tr = document.createElement('tr');
+          tr.dataset.id = id;
+          tr.dataset.name = name;
+          tr.dataset.category = category;
+          tr.dataset.price = price;
+          tr.dataset.desc = desc;
+          tr.dataset.featured = featured;
+          tr.dataset.status = status;
+          tr.dataset.image = image;
+          tr.innerHTML = `
+            <td>#${String(id).padStart(3,'0')}</td>
+            <td><div style="width:80px;height:50px;border-radius:6px;overflow:hidden;"><img src="${image || 'https://source.unsplash.com/160x120/?mango'}" alt="" style="width:100%;height:100%;object-fit:cover;"></div></td>
+            <td>${escapeHtml(name)}</td>
+            <td>${capitalize(category)}</td>
+            <td>₱${Number(price).toFixed(2)}</td>
+            <td>${featured === 'true' ? '<span class="status completed">Yes</span>' : '<span class="status pending">No</span>'}</td>
+            <td>${status === 'active' ? '<span class="status completed">Active</span>' : '<span class="status pending">Inactive</span>'}</td>
+            <td><button class="btn-edit row-edit">Edit</button> <button class="btn-delete row-delete">Delete</button></td>
+          `;
+          tbody.appendChild(tr);
+        } else {
+          // update existing
+          const row = tbody.querySelector(`tr[data-id="${id}"]`);
+          if (row) {
+            row.dataset.name = name;
+            row.dataset.category = category;
+            row.dataset.price = price;
+            row.dataset.desc = desc;
+            row.dataset.featured = featured;
+            row.dataset.status = status;
+            row.dataset.image = image;
+            row.cells[1].querySelector('img').src = image || 'https://source.unsplash.com/160x120/?mango';
+            row.cells[2].textContent = name;
+            row.cells[3].textContent = capitalize(category);
+            row.cells[4].textContent = `₱${Number(price).toFixed(2)}`;
+            row.cells[5].innerHTML = featured === 'true' ? '<span class="status completed">Yes</span>' : '<span class="status pending">No</span>';
+            row.cells[6].innerHTML = status === 'active' ? '<span class="status completed">Active</span>' : '<span class="status pending">Inactive</span>';
+          }
+        }
+
+        closeModal();
+      });
+
+      // small helpers
+      function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+      function escapeHtml(str) {
+        return str.replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+      }
+
+      // Export CSV demo (simple)
+      document.getElementById('export-csv').addEventListener('click', () => {
+        const rows = Array.from(tbody.querySelectorAll('tr')).map(tr => {
+          return [
+            tr.dataset.id,
+            tr.dataset.name,
+            tr.dataset.category,
+            tr.dataset.price,
+            tr.dataset.featured,
+            tr.dataset.status,
+            tr.dataset.image
+          ].map(s => `"${(s||'').toString().replace(/"/g,'""')}"`).join(',');
+        });
+        const csv = 'id,name,category,price,featured,status,image\n' + rows.join('\n');
+        const blob = new Blob([csv], {type: 'text/csv'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'menu_items.csv'; a.click(); URL.revokeObjectURL(url);
+      });
+
+      // Search and filter (basic)
+      document.getElementById('menu-search').addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase();
+        Array.from(tbody.querySelectorAll('tr')).forEach(tr => {
+          tr.style.display = (tr.dataset.name.toLowerCase().includes(q) || tr.dataset.desc.toLowerCase().includes(q)) ? '' : 'none';
+        });
+      });
+      document.getElementById('filter-category').addEventListener('change', (e) => {
+        const cat = e.target.value;
+        Array.from(tbody.querySelectorAll('tr')).forEach(tr => {
+          tr.style.display = (cat === 'all' || tr.dataset.category === cat) ? '' : 'none';
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>

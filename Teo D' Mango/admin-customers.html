@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customers - Teo D' Mango</title>
+  <link rel="stylesheet" href="admin-admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo"><h2>Teo D' <span>Mango</span></h2></div>
+    <ul class="nav-links">
+      <li><a href="index-admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+      <li><a href="admin-orders.html"><i class="fas fa-receipt"></i> Orders</a></li>
+      <li><a href="admin-menu.html"><i class="fas fa-utensils"></i> Menu</a></li>
+      <li><a href="admin-customers.html" class="active"><i class="fas fa-users"></i> Customers</a></li>
+      <li><a href="admin-promotions.html"><i class="fas fa-tags"></i> Promotions</a></li>
+      <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+      <li><a href="admin-settings.html"><i class="fas fa-cogs"></i> Settings</a></li>
+      <li><a href="admin-login.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <h1>Customers</h1>
+      <div class="profile"><i class="fas fa-user-circle"></i> Admin</div>
+    </header>
+
+    <section class="customers">
+      <h2>Customer List</h2>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Total Orders</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td>Maria Gomez</td>
+            <td>maria@gmail.com</td>
+            <td>09123456789</td>
+            <td>5</td>
+            <td><button class="btn-delete">Delete</button></td>
+          </tr>
+          <tr>
+            <td>02</td>
+            <td>John Perez</td>
+            <td>johnp@gmail.com</td>
+            <td>09987654321</td>
+            <td>3</td>
+            <td><button class="btn-delete">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

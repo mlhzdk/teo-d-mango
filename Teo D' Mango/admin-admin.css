@@ -1,0 +1,286 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --mango-yellow: #fbc02d;
+  --mango-orange: #f57c00;
+  --dark: #333;
+  --light: #fff;
+  --gray: #f4f4f4;
+}
+
+/* Layout */
+body {
+  display: flex;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--gray);
+  color: var(--dark);
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: var(--mango-orange);
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .logo {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sidebar .logo span {
+  color: var(--mango-yellow);
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background: var(--mango-yellow);
+  color: var(--dark);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.topbar h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.topbar .profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Dashboard Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  color: var(--mango-orange);
+}
+
+/* Table Section */
+.table-section {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.table-section h2 {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table thead {
+  background: var(--mango-yellow);
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status.pending { background: orange; color: white; }
+.status.preparing { background: #03a9f4; color: white; }
+.status.completed { background: #4caf50; color: white; }
+.status.waiting-for-delivery-rider { background: rgba(255, 0, 251, 0.534); color: white; }
+.status.in-transit { background: #b7ff00; color: white; }
+.status.delivered { background: #009393; color: white; }
+.status.cancelled { background: crimson; color: white; }
+
+.btn-edit,
+.btn-delete {
+  padding: 5px 10px;
+  margin: 0 2px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background: var(--mango-orange);
+  color: white;
+}
+
+.btn-delete {
+  background: crimson;
+  color: white;
+}
+
+/* Settings Page */
+.settings form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.settings label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.settings input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.settings button {
+  background: var(--mango-orange);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Reports Page */
+.reports .report-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.reports ul {
+  margin-top: 10px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  list-style: none;
+}
+
+.reports ul li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* Promotions Page */
+.promotions .btn-edit {
+  margin-bottom: 10px;
+}
+
+.promotions table {
+  margin-top: 10px;
+}
+
+/* Customers Page */
+.customers table {
+  margin-top: 10px;
+}
+
+/* Login Page */
+body.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg,var(--mango-orange),var(--mango-yellow));
+}
+
+.login-box {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+  color: var(--mango-orange);
+}
+
+.login-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-box input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.login-box button {
+  background: var(--mango-orange);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

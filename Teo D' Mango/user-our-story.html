@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story - Teo D' Mango</title>
+    <link rel="stylesheet" href="user-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .story-content {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .story-text h3 {
+            color: #ff5722;
+            margin: 30px 0 15px;
+            font-size: 24px;
+        }
+
+        .story-text h3:first-child {
+            margin-top: 0;
+        }
+
+        .story-text p {
+            color: #5a3e1b;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .values-section {
+            padding: 80px 0;
+            background-color: #fff9e6;
+        }
+
+        .values-section h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #ff5722;
+        }
+
+        .values-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .value-item {
+            flex: 1;
+            min-width: 250px;
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .value-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-item i {
+            font-size: 48px;
+            color: #ff9800;
+            margin-bottom: 20px;
+        }
+
+        .value-item h3 {
+            color: #e65100;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .value-item p {
+            color: #5a3e1b;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .story-content {
+                padding: 30px 25px;
+            }
+
+            .values-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .value-item {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav class="top-nav">
+                <a href="index-user.html" class="logo">Teo D' <span>Mango</span></a>
+                <ul class="nav-links">
+                    <li><a href="user-index.html">HOME</a></li>
+                    <li><a href="user-menu.html">MENU</a></li>
+                    <li><a href="user-our-story.html">OUR STORY</a></li>
+                    <li><a href="user-about.html">ABOUT</a></li>
+                    <li><a href="user-contact.html">CONTACT US</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Our Sweet Journey</h1>
+            <p class="tagline">From a simple passion for mangoes to bringing authentic flavors to your neighborhood</p>
+        </div>
+    </section>
+
+    <section class="featured-shakes">
+        <div class="container">
+            <h2>Our Story</h2>
+            <div class="story-content">
+                <div class="story-text">
+                    <h3>The Beginning of Something Sweet</h3>
+                    <p>Teo D' Mango began in 2022 with a simple vision: to bring the authentic taste of fresh Philippine
+                        mangoes to everyone. What started as a small kiosk in Lemery has grown into a beloved brand
+                        known for quality and authenticity.</p>
+
+                    <p>Our founder, Teodoro Mendoza III, grew up surrounded by mango orchards in Lemery, Philippines. He
+                        learned early on that the secret to a perfect mango shake wasn't just in the recipe, but in the
+                        quality of the mangoes themselves.</p>
+
+                    <h3>Growing Together</h3>
+                    <p>As word spread about our delicious, authentic mango shakes, we expanded to multiple locations
+                        while maintaining our commitment to quality. Each new store brought us closer to communities who
+                        shared our love for fresh, natural flavors.</p>
+
+                    <p>Today, we continue to source our mangoes directly from Philippine farmers, ensuring every shake
+                        carries the authentic taste that started our journey.</p>
+
+                    <h3>Our Promise to You</h3>
+                    <p>We believe that everyone deserves to experience the joy of premium mango shakes made with real,
+                        fresh ingredients. No artificial flavors, no shortcuts - just the genuine taste of ripe mangoes
+                        in every sip.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values-section">
+        <div class="container">
+            <h2>What Makes Us Different</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Fresh Ingredients</h3>
+                    <p>We use only the freshest, ripest mangoes sourced directly from trusted farmers.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-heart"></i>
+                    <h3>Made with Love</h3>
+                    <p>Every shake is prepared with care, following traditional recipes with a modern touch.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-users"></i>
+                    <h3>Community Focused</h3>
+                    <p>We're not just a business - we're part of the communities we serve.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Eco-Friendly</h3>
+                    <p>Committed to sustainable practices and reducing our environmental footprint.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Teo D' Mango</h3>
+                    <p>We believe that premium mango shakes should be accessible to everyone, not just a luxury for a
+                        few. Our mission is to bring high-quality, naturally sweet mango creations to communities
+                        everywhere.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/17NpArsfbZ/?mibextid=wwXIfr"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/teodmango_?igsh=MWx2OHRxMGhyNjB4aw=="><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="user-our-story.html"><i class="fas fa-chevron-right"></i> Our Story</a></li>
+                        <li><a href="user-menu.html"><i class="fas fa-chevron-right"></i> Full Menu</a></li>
+                        <li><a href="user-about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="user-contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                        <li><a href="user-menu.html"><i class="fas fa-chevron-right"></i> Track Order</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Store Information</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Corner P. Gomez St., Ilustre Avenue, Lemery, Batangas,
+                            Philippines</li>
+                        <li><i class="fas fa-phone"></i> 0906 975 5155</li>
+                        <li><i class="fas fa-envelope"></i> teodmango@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 7am-10pm</li>
+                        <li><i class="fas fa-clock"></i> Sat-Sun: 8am-11pm</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Mango Newsletter</h3>
+                    <p>Subscribe for seasonal specials, new flavors, and exclusive discounts.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Teo D' Mango. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Nutrition Info</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
