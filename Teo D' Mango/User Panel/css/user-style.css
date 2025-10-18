@@ -68,7 +68,7 @@ header {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('teo-picture.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../pages/teo-picture.jpg');
     background-size: cover;
     background-position: center;
     color: white;
@@ -142,19 +142,19 @@ header {
 }
 
 .mango-classic {
-    background-image: url('mango-shake.png');
+    background-image: url('../pages/mango-shake.png');
 }
 
 .mango-avocado {
-    background-image: url('avocado-shake.png');
+    background-image: url('../pages/avocado-shake.png');
 }
 
 .mango-buko {
-    background-image: url('buko-shake.png');
+    background-image: url('../pages/buko-shake.png');
 }
 
 .strawberry-shake {
-    background-image: url('strawberry-shake.png');
+    background-image: url('../pages/strawberry-shake.png');
 }
 
 .shake-card h3 {
