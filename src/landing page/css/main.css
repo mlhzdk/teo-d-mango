@@ -1,0 +1,41 @@
+        /* Bouncy hover effect */
+        .bouncy-hover {
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .bouncy-hover:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        /* Subtle floating animation for the hero image */
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #FFFDF5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FFE600;
+            border-radius: 5px;
+        }

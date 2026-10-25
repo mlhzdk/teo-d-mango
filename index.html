@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEO D' MANGO — Overload Mango Shake</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandYellow: '#FFE600',
+                        brandDark: '#1A1A1A',
+                        brandGreen: '#008C45',
+                        brandOffWhite: '#FFFDF5',
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        fun: ['Fredoka', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Bouncy hover effect for buttons */
+        .bouncy-hover {
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .bouncy-hover:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        /* Subtle floating animation for the hero image */
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* --- CUSTOM SCROLLBAR --- */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F0F0F0;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #FFE600;
+            border-radius: 10px;
+            border: 2px solid #F0F0F0;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #008C45;
+        }
+    </style>
+</head>
+
+<body class="bg-brandOffWhite text-brandDark font-sans antialiased overflow-x-hidden">
+
+    <!-- FUN HEADER -->
+    <nav class="fixed w-full z-50 top-0 bg-white border-b-4 border-brandDark transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+
+                <!-- Logo Area -->
+                <a href="#home" class="flex items-center gap-2 cursor-pointer z-50">
+                    <img src="./src/assets/image/logo.jpg" alt="TEO D' MANGO"
+                        class="h-12 md:h-14 w-auto object-contain mix-blend-multiply"
+                        onerror="this.style.display='none'; document.getElementById('text-logo').classList.remove('hidden');">
+
+                    <div id="text-logo" class="hidden font-fun font-bold text-2xl tracking-tighter text-brandDark">
+                        TEO D' <span class="text-brandGreen">MANGO</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 font-fun font-medium text-lg">
+                    <a href="#home" class="hover:text-brandGreen transition">Home</a>
+                    <a href="#menu" class="hover:text-brandGreen transition">Menu</a>
+                    <a href="#about" class="hover:text-brandGreen transition">Our Story</a>
+                    <a href="#location" class="hover:text-brandGreen transition">Location</a>
+                </div>
+
+                <!-- Header CTA Button -->
+                <div class="hidden md:block">
+                    <a href="https://www.facebook.com/profile.php?id=100089100887642" target="_blank"
+                        rel="noopener noreferrer"
+                        class="bg-brandYellow text-brandDark border-2 border-brandDark px-6 py-2.5 rounded-full font-fun font-bold text-lg bouncy-hover inline-block shadow-[4px_4px_0px_#1A1A1A]">
+                        Order Now
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button id="mobile-btn" class="md:hidden z-50 text-brandDark focus:outline-none p-2">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 8h16M4 16h16">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu"
+            class="hidden bg-brandYellow border-b-4 border-brandDark absolute w-full font-fun text-xl font-bold">
+            <div class="px-4 pt-2 pb-6 space-y-4 flex flex-col items-center shadow-xl">
+                <a href="#home" class="block w-full text-center py-2 hover:text-brandGreen">Home</a>
+                <a href="#menu" class="block w-full text-center py-2 hover:text-brandGreen">Menu</a>
+                <a href="#about" class="block w-full text-center py-2 hover:text-brandGreen">Our Story</a>
+                <a href="#location" class="block w-full text-center py-2 hover:text-brandGreen">Location</a>
+                <a href="https://www.facebook.com/profile.php?id=100089100887642" target="_blank"
+                    rel="noopener noreferrer"
+                    class="block mt-4 w-full text-center bg-white border-2 border-brandDark px-4 py-3 rounded-full">Order
+                    via Facebook</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home"
+        class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-brandOffWhite">
+
+        <!-- Decorative Blobs -->
+        <div
+            class="absolute top-20 -left-10 w-72 h-72 bg-brandYellow rounded-full mix-blend-multiply filter blur-3xl opacity-50">
+        </div>
+        <div
+            class="absolute bottom-10 right-0 w-72 h-72 bg-brandGreen rounded-full mix-blend-multiply filter blur-3xl opacity-20">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+                <!-- Text Content -->
+                <div class="space-y-8">
+                    <div
+                        class="inline-block bg-brandGreen text-white px-5 py-2 rounded-full font-fun font-bold text-sm tracking-wide shadow-md rotate-[-2deg]">
+                        #1 OVERLOAD MANGO SHAKE
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-fun font-bold leading-[1.1] text-brandDark">
+                        Taste the <br>
+                        <span class="text-brandGreen">Tropical</span> <br>
+                        Overload!
+                    </h1>
+                    <p class="text-gray-700 text-lg max-w-lg font-medium">
+                        At Teo D' Mango, we bring families together with our fresh, flavorful mango shakes. As a
+                        family-owned business, we take pride in serving every cup with love and quality.
+                    </p>
+                    <div class="flex gap-4 pt-4">
+                        <a href="#menu"
+                            class="bg-brandDark text-brandYellow px-8 py-4 rounded-full font-fun font-bold text-lg hover:bg-brandGreen transition shadow-lg flex items-center gap-2 bouncy-hover">
+                            See the Menu <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="relative flex justify-center items-center float">
+                    <div class="relative w-full max-w-md">
+                        <!-- Yellow offset background -->
+                        <div
+                            class="absolute inset-0 bg-brandYellow rounded-[3rem] rotate-6 transform border-4 border-brandDark">
+                        </div>
+
+                        <img src="./src/assets/image/main-shake.JPG" alt="Mango Shake"
+                            class="relative z-10 w-full object-cover rounded-[3rem] border-4 border-brandDark aspect-square">
+                    </div>
+
+                    <!-- Sticker Badge -->
+                    <div
+                        class="absolute -top-6 -right-2 md:-right-6 bg-white border-4 border-brandDark p-3 rounded-full z-20 shadow-[4px_4px_0px_#1A1A1A] rotate-12">
+                        <span
+                            class="font-fun font-bold text-brandGreen text-xl block text-center leading-tight">100%<br>Natural</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section id="menu" class="py-24 bg-brandYellow border-y-8 border-brandDark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-fun font-bold text-brandDark mb-4">Our Shake Sizes and Prices</h2>
+                <div class="w-32 h-2 bg-brandGreen mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Card 1 -->
+                <div
+                    class="bg-white rounded-3xl p-6 text-center border-4 border-brandDark shadow-[8px_8px_0px_#1A1A1A] hover:-translate-y-2 transition duration-300">
+                    <div class="relative inline-block mb-4">
+                        <img src="./src/assets/image/main-shake.JPG" alt="Classic Mango"
+                            class="w-40 h-40 object-cover rounded-full border-4 border-brandDark">
+                        <span
+                            class="absolute -top-2 -right-2 bg-brandGreen text-white font-fun font-bold px-3 py-1 rounded-full text-sm border-2 border-brandDark rotate-6">BESTSELLER</span>
+                    </div>
+                    <h3 class="text-2xl font-fun font-bold mb-2">Large Classic Mango</h3>
+                    <p class="text-gray-600 text-sm mb-6 font-medium">Fresh mangoes, milk, and our secret blend of ice
+                        cream.</p>
+                    <div class="flex justify-center items-center">
+                        <span
+                            class="text-3xl font-fun font-bold text-brandDark bg-brandYellow px-6 py-1 rounded-full border-2 border-brandDark">₱100.00</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="bg-white rounded-3xl p-6 text-center border-4 border-brandDark shadow-[8px_8px_0px_#1A1A1A] hover:-translate-y-2 transition duration-300 md:-translate-y-4">
+                    <div class="relative inline-block mb-4">
+                        <img src="./src/assets/image/main-shake.JPG" alt="Cheesy Mango"
+                            class="w-40 h-40 object-cover rounded-full border-4 border-brandDark">
+                    </div>
+                    <h3 class="text-2xl font-fun font-bold mb-2">Medium Classic Mango</h3>
+                    <p class="text-gray-600 text-sm mb-6 font-medium">Fresh mangoes, milk, and our secret blend of ice
+                        cream.</p>
+                    <div class="flex justify-center items-center">
+                        <span
+                            class="text-3xl font-fun font-bold text-brandDark bg-brandYellow px-6 py-1 rounded-full border-2 border-brandDark">₱90.00</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="bg-white rounded-3xl p-6 text-center border-4 border-brandDark shadow-[8px_8px_0px_#1A1A1A] hover:-translate-y-2 transition duration-300">
+                    <div class="relative inline-block mb-4">
+                        <img src="./src/assets/image/main-shake.JPG" alt="Graham Mango"
+                            class="w-40 h-40 object-cover rounded-full border-4 border-brandDark">
+                        <span
+                            class="absolute -top-2 -right-2 bg-brandYellow text-brandDark font-fun font-bold px-3 py-1 rounded-full text-sm border-2 border-brandDark -rotate-6">NEW!</span>
+                    </div>
+                    <h3 class="text-2xl font-fun font-bold mb-2">Small Graham Mango</h3>
+                    <p class="text-gray-600 text-sm mb-6 font-medium">Fresh mangoes, milk, and our secret blend of ice
+                        cream.</p>
+                    <div class="flex justify-center items-center">
+                        <span
+                            class="text-3xl font-fun font-bold text-brandDark bg-brandYellow px-6 py-1 rounded-full border-2 border-brandDark">₱80.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu CTA -->
+            <div class="mt-20 text-center">
+                <p class="font-fun font-bold text-xl mb-4 text-brandDark">Ready to order? Message us!</p>
+                <a href="https://www.facebook.com/profile.php?id=100089100887642"
+                    class="inline-block bg-brandDark text-white px-10 py-4 rounded-full font-fun font-bold text-xl hover:bg-brandGreen transition shadow-[6px_6px_0px_#FFE600] bouncy-hover border-2 border-brandDark">
+                    Order via Facebook <i class="fab fa-facebook ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 bg-brandDark text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-fun font-bold mb-4 text-brandYellow">Why TEO D' MANGO?</h2>
+                <p class="text-gray-300 font-medium">We keep it real, we keep it sweet.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <div class="bg-[#2A2A2A] p-8 rounded-3xl border-2 border-gray-700 flex gap-6 items-start">
+                    <div
+                        class="w-16 h-16 bg-brandYellow rounded-2xl flex items-center justify-center flex-shrink-0 border-2 border-brandDark shadow-[4px_4px_0px_#008C45]">
+                        <span class="text-3xl font-fun font-bold text-brandDark">1</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-fun font-bold mb-2 text-brandYellow">Premium Mangoes</h3>
+                        <p class="text-gray-400 font-medium leading-relaxed">
+                            We source only the sweetest, ripest mangoes. Our commitment to quality ensures every glass
+                            is rich, creamy, and bursting with natural flavor.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-[#2A2A2A] p-8 rounded-3xl border-2 border-gray-700 flex gap-6 items-start">
+                    <div
+                        class="w-16 h-16 bg-brandGreen rounded-2xl flex items-center justify-center flex-shrink-0 border-2 border-brandDark shadow-[4px_4px_0px_#FFE600]">
+                        <span class="text-3xl font-fun font-bold text-white">2</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-fun font-bold mb-2 text-brandGreen">Tropical Vibes</h3>
+                        <p class="text-gray-400 font-medium leading-relaxed">
+                            Our cozy ambiance is filled with fun, energetic vibes. Unwind with a refreshing shake and
+                            enjoy the perfect setting for meetups or solo relaxation.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-[#2A2A2A] p-8 rounded-3xl border-2 border-gray-700 flex gap-6 items-start">
+                    <div
+                        class="w-16 h-16 bg-brandGreen rounded-2xl flex items-center justify-center flex-shrink-0 border-2 border-brandDark shadow-[4px_4px_0px_#FFE600]">
+                        <span class="text-3xl font-fun font-bold text-white">3</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-fun font-bold mb-2 text-brandGreen">Custom For You</h3>
+                        <p class="text-gray-400 font-medium leading-relaxed">
+                            Whether you want extra cheese, less sugar, or a special topping, we customize your shake
+                            just for you. Your perfect drink, your way.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-[#2A2A2A] p-8 rounded-3xl border-2 border-gray-700 flex gap-6 items-start">
+                    <div
+                        class="w-16 h-16 bg-brandYellow rounded-2xl flex items-center justify-center flex-shrink-0 border-2 border-brandDark shadow-[4px_4px_0px_#008C45]">
+                        <span class="text-3xl font-fun font-bold text-brandDark">4</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-fun font-bold mb-2 text-brandYellow">Friendly Team</h3>
+                        <p class="text-gray-400 font-medium leading-relaxed">
+                            Our staff is trained to provide top-notch service with a smile. We anticipate your needs and
+                            ensure your visit is nothing short of awesome.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION SECTION -->
+    <section id="location" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-fun font-bold text-brandDark mb-4">Visit Us</h2>
+                <div class="w-32 h-2 bg-brandYellow mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-stretch">
+
+                <!-- Info Card -->
+                <div
+                    class="bg-brandDark text-white p-8 rounded-3xl border-4 border-brandDark shadow-[8px_8px_0px_#FFE600] flex flex-col justify-center gap-6">
+                    <div>
+                        <h3 class="text-2xl font-fun font-bold text-brandYellow mb-2"><i
+                                class="fas fa-map-marker-alt mr-2"></i> Address</h3>
+                        <p class="text-gray-300 font-medium">019 Doña Conchita St,<br>Sambal Ibaba, Lemery,<br>4209
+                            Batangas</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-fun font-bold text-brandYellow mb-2"><i class="fas fa-clock mr-2"></i>
+                            Hours</h3>
+                        <p class="text-gray-300 font-medium">Mon - Sun<br>10:00 AM - 8:00 PM</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-fun font-bold text-brandYellow mb-2"><i
+                                class="fas fa-phone-alt mr-2"></i> Contact</h3>
+                        <p class="text-gray-300 font-medium">0962 515 2602</p>
+                    </div>
+                </div>
+
+                <!-- Map (Using your provided iframe) -->
+                <div
+                    class="lg:col-span-2 rounded-3xl overflow-hidden border-4 border-brandDark shadow-[8px_8px_0px_#008C45] h-[400px] lg:h-auto relative">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3873.2871414320466!2d120.9068142759357!3d13.881771386523813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd0a1c91f67583%3A0x72eeef37c4263b45!2s019%20Do%C3%B1a%20Conchita%20St%2C%20Sambal%20Ibaba%2C%20Lemery%2C%204209%20Batangas!5e0!3m2!1sen!2sph!4v1792911988174!5m2!1sen!2sph"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        class="absolute inset-0 w-full h-full grayscale hover:grayscale-0 transition duration-500">
+                    </iframe>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brandYellow py-8 border-t-8 border-brandDark">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+
+            <div class="flex flex-col items-center md:items-start gap-1">
+                <span class="font-fun font-bold text-3xl tracking-tighter text-brandDark">TEO D' <span
+                        class="text-brandGreen">MANGO</span></span>
+                <span class="text-xs font-bold text-brandDark">© 2024. All rights reserved.</span>
+            </div>
+
+            <div class="flex gap-6 font-fun font-bold text-brandDark text-lg">
+                <a href="https://www.facebook.com/profile.php?id=100089100887642"
+                    class="hover:text-white transition">Facebook</a>
+                <a href="https://www.instagram.com/teodmango/" class="hover:text-white transition">Instagram</a>
+            </div>
+
+            <a href="#home"
+                class="w-12 h-12 bg-brandDark text-brandYellow rounded-full flex items-center justify-center border-2 border-brandDark hover:bg-brandGreen hover:text-white transition shadow-[4px_4px_0px_#1A1A1A]">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18">
+                    </path>
+                </svg>
+            </a>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const mobileBtn = document.getElementById('mobile-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+
+</html>
